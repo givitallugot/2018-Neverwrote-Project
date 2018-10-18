@@ -12,6 +12,15 @@
 const path = require('path');
 const express = require('express');
 const Youch = require('youch');
+const React = require('react'); // +
+const ReactDOMServer = require('react-dom/server'); // +
+const _ = require('lodash'); // +
+const moment = require('moment'); // +
+
+const api = require('./helpers/api'); // +
+const createStore = require('./helpers/createStore'); // +
+const Root = React.createFactory(require('./components/Root')); // +
+const combinedReducers = require('./reducers'); // +
 
 // Create a new Express app
 const app = express();
@@ -24,8 +33,18 @@ app.use('/assets/font-awesome/fonts', express.static(
   path.dirname(require.resolve('font-awesome/fonts/FontAwesome.otf'))));
 
 // Set up the index route
-app.get('/', (req, res) => {
-  const htmlDocument = `<!DOCTYPE html>
+app.get('/', (req, res, next) => {
+  // + api.get('/posts') { }.catch(next);
+  api.get('/notebooks').then((notebooks) => {
+    // + Get the default Redux initial state
+    const initialState = combinedReducers();
+    // + Add some data to the initial state
+    initialState.notebooks.data = notebooks;
+    //initialState.time.now = moment().format();
+    // + Get a JSON string representation of the initial state
+    const initialStateString = JSON.stringify(initialState).replace(/<\//g, "<\\/");
+
+      const htmlDocument = `<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="utf-8">
@@ -39,12 +58,14 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div id="root"></div>
-        <script>main();</script>
+        <script>main(${initialStateString});</script>
       </body>
     </html>`;
 
   // Respond with the complete HTML page
   res.send(htmlDocument);
+
+  }).catch(next);
 });
 
 // Catch-all for handling errors.
