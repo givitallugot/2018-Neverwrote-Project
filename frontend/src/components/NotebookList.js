@@ -3,6 +3,7 @@ const ReactRedux = require('react-redux');
 
 const Notebook = require('./Notebook');
 const ActiveNotebook = require('./ActiveNotebook');
+const NotebookNew = require('./NotebookNew');
 
 const createActionDispatchers = require('../helpers/createActionDispatchers');
 const notebooksActionCreators = require('../reducers/notebooks');
@@ -43,9 +44,9 @@ class NotebookList extends React.Component {
     return (
       <div>
         <h2>Notebooks</h2>
-
-        <button id="new-notebook">+ new notebook</button>
-
+        <NotebookNew
+          createNotebook={this.props.createNotebook}
+        />
         <ul>
           {this.props.notebooks.data.map(createNotebookComponent)}
         </ul>

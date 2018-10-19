@@ -3,6 +3,7 @@ const api = require('../helpers/api');
 
 // Action type constants
 /* *** TODO: Put action constants here *** */
+const INSERT = 'nevewrote/notebooks/INSERT';
 const UPDATE = 'nevewrote/notebooks/UPDATE';
 
 const initialState = {
@@ -22,6 +23,11 @@ function reducer(state, action) {
 
   switch(action.type) {
     /* *** TODO: Put per-action code here *** */
+    case INSERT: {
+      const unsortedNotebooks = _.concat(state.visibleNotebooks, action.notebooks);
+      const visibleNotebooks = _.orderBy(unsortedNotebooks, 'createdAt','desc');
+      return _.assign({}, state, { visibleNotebooks} );
+    }
 
   	case UPDATE: {
     	return _.assign({}, state, { activeNotebookId: action.notebookId, notes: action.notes });
@@ -42,6 +48,21 @@ reducer.loadNotes = (notebookId, callback) => {
       callback();
     }).catch(() => {
       alert('Failed to get notes.');
+    });
+  };
+};
+
+reducer.inserNotebooks = (notebooks) => {
+  return { type: INSERT, notebooks };
+};
+
+reducer.createNotebook = (newNotebook, callback) => {
+  return (dispatch) => {
+    api.post('/notebooks', newNotebook).then((notebook) => {
+      dispatch(reducer.insertNotebooks([notebook]));
+      callback();
+    }).catch(() => {
+      alert('Failed to create Notebook.');
     });
   };
 };

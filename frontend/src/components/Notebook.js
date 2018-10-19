@@ -1,11 +1,12 @@
 const React = require('react');
 
+const NotebookEdit = require('./NotebookEdit');
 const NotebookView = require('./NotebookView');
 
 class Notebook extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { Activing: false };
+    this.state = { editing: false };
   }
 
   render() {
@@ -15,6 +16,7 @@ class Notebook extends React.Component {
       this.setState({ Activing: true });
     };
 
+    //START HEAR!!
     //Put edit here
 
     // Render read-only view of the post
