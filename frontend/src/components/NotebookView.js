@@ -8,7 +8,7 @@ const React = require('react');
  */
 const NotebookView = (props) => {
   return (
-    <li className="neverwrote-notebook-title">>
+    <li className="neverwrote-notebook-title">
       <a href="#" onClick={props.notebookClick}>
         {props.notebook.title}
       </a>

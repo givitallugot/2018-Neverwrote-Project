@@ -1,12 +1,12 @@
 const React = require('react');
 
-const NotebookView = require('./NotebookView');
+const ActiveNotebookView = require('./ActiveNotebookView');
 const NoteView = require('./NoteView');
 
 class ActiveNotebook extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editing: false };
+    this.state = { Activing: true };
   }
 
   render() {
@@ -15,9 +15,10 @@ class ActiveNotebook extends React.Component {
 
     // Render read-only view of the post
     return (
-      <NotebookView
+      <ActiveNotebookView
+        //key={notebook.id}
         notebook={this.props.notebook}
-        note={this.props.note} //?How can i bring notes??
+        notes={this.props.notes}
       />
     );
   }

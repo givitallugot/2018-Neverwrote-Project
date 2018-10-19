@@ -17,11 +17,11 @@ const notebooksActionCreators = require('../reducers/notebooks');
 class NotebookList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {loading: false};
+    this.state = { Activing: false };
   }
 
   render() {
-    const createNotebookListItem = (notebook) => {
+    const createNotebookComponent = (notebook) => {
       if(notebook.id === this.props.activeNotebookId) {
       	return (
           <ActiveNotebook
@@ -43,8 +43,11 @@ class NotebookList extends React.Component {
     return (
       <div>
         <h2>Notebooks</h2>
+
+        <button id="new-notebook">+ new notebook</button>
+
         <ul>
-          {this.props.notebooks.data.map(createNotebookListItem)}
+          {this.props.notebooks.data.map(createNotebookComponent)}
         </ul>
       </div>
     );

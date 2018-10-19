@@ -10,6 +10,7 @@ const initialState = {
     { id: 100, title: 'From Redux Store: A hard-coded notebook' },
     { id: 101, title: 'From Redux Store: Another hard-coded notebook' },
   ],
+  activeNotebookId: -1,
   notes : []
 };
 
@@ -32,12 +33,15 @@ function reducer(state, action) {
 
 // Action creators
 /* *** TODO: Put action creators here *** */
-reducer.loadNotes = (notebookId) => {
+reducer.loadNotes = (notebookId, callback) => {
 
 	return (dispatch) => {
     api.get('/notebooks/' + notebookId + '/notes').then((notes) => {
       console.log(JSON.stringify(console.log(notes)));
-      dispatch({ type: UPDATE, notebookId, notes })
+      dispatch({ type: UPDATE, notebookId, notes });
+      callback();
+    }).catch(() => {
+      alert('Failed to get notes.');
     });
   };
 };

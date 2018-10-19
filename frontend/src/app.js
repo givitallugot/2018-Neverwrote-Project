@@ -44,6 +44,13 @@ app.get('/', (req, res, next) => {
     // + Get a JSON string representation of the initial state
     const initialStateString = JSON.stringify(initialState).replace(/<\//g, "<\\/");
 
+    // Create the Redux store
+    const store = createStore(initialState);
+    // Create the root React component
+    const rootComponent = Root( store );
+    // Render the root component to a HTML string
+    const reactHtml = ReactDOMServer.renderToString(rootComponent);
+
       const htmlDocument = `<!DOCTYPE html>
     <html lang="en">
       <head>
@@ -57,7 +64,7 @@ app.get('/', (req, res, next) => {
         <script src="/assets/js/app.js"></script>
       </head>
       <body>
-        <div id="root"></div>
+        <div id="root">${reactHtml}</div>
         <script>main(${initialStateString});</script>
       </body>
     </html>`;

@@ -6,15 +6,16 @@ const React = require('react');
  *
  * List of props:
  */
-const NoteView = (props) => {
+
+const ActiveNotebookView = (props) => {
   return (
     <li className="neverwrote-note-title">>
-        {props.note.title}
-        <ol className="neverwrote-note-content">
-           {this.props.notes.map(note => <li key={note.id}> {props.note.content} </li>)}
-         </ol>
+        {props.notebook.title}
+        <ul className="neverwrote-note-title">
+           {this.props.notes.map(note => <li> {note.title} </li>)}
+        </ul>
     </li>
   );
 };
 
-module.exports = NoteView;
+module.exports = ActiveNotebookView;
