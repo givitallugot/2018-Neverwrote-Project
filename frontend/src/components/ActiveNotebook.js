@@ -1,6 +1,7 @@
 const React = require('react');
 
 const ActiveNotebookView = require('./ActiveNotebookView');
+const NoteList = require('./NoteList');
 
 class ActiveNotebook extends React.Component {
   constructor(props) {

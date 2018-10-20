@@ -17,11 +17,14 @@ const ActiveNotebookView = (props) => {
         <span className="fa fa-remove" />
       </a>
       {props.notebook.title}
-      <ul className="neverwrote-note-title">
-        {props.notes.map(note => <li key={note.id}> {note.title} </li>)}
-      </ul>
     </li>
   );
 };
+
+      /*
+      <ul className="neverwrote-note-title">
+        {props.notes.map(note => <li key={note.id}> {note.title} </li>)}
+      </ul>
+      */
 
 module.exports = ActiveNotebookView;

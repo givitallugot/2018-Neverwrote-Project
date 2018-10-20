@@ -1,6 +1,8 @@
 const React = require('react');
 const ReactRedux = require('react-redux');
 
+const NoteList = require('./NoteList');
+
 const Notebook = require('./Notebook');
 const ActiveNotebook = require('./ActiveNotebook');
 const NotebookNew = require('./NotebookNew');
@@ -19,12 +21,12 @@ class NotebookList extends React.Component {
     const createNotebookComponent = (notebook) => {
       if(notebook.id === this.props.notebooks.activeNotebookId) {
       	return (
-          <ActiveNotebook
-            key={notebook.id}
-            notebook={notebook}
-            notes={this.props.notebooks.notes}
-            deleteNotebook={this.props.deleteNotebook}
-          />
+            <ActiveNotebook
+              key={notebook.id}
+              notebook={notebook}
+              notes={this.props.notebooks.notes}
+              deleteNotebook={this.props.deleteNotebook}
+            />
         );
       }
       return (
@@ -38,14 +40,20 @@ class NotebookList extends React.Component {
     };
 
     return (
-      <div>
+      <div className="neverwrote-notebook-div">
         <h2>Notebooks</h2>
         <NotebookNew
           createNotebook={this.props.createNotebook}
         />
+        
         <ul>
           {this.props.notebooks.data.map(createNotebookComponent)}
         </ul>
+
+        <NoteList
+          notebooks={this.props.notebooks}
+          notes={this.props.notebooks.notes}
+        />
       </div>
     );
   }
