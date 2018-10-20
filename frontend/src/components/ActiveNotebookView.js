@@ -9,11 +9,17 @@ const React = require('react');
 
 const ActiveNotebookView = (props) => {
   return (
-    <li className="neverwrote-note-title">>
-        {props.notebook.title}
-        <ul className="neverwrote-note-title">
-           {this.props.notes.map(note => <li> {note.title} </li>)}
-        </ul>
+    <li className="neverwrote-note-title">
+      <a role="button" title="Delete active notebook"
+        style={{ paddingRight: '8px' }}
+        onClick={ props.onDelete }
+      >
+        <span className="fa fa-remove" />
+      </a>
+      {props.notebook.title}
+      <ul className="neverwrote-note-title">
+        {props.notes.map(note => <li key={note.id}> {note.title} </li>)}
+      </ul>
     </li>
   );
 };

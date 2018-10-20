@@ -4,6 +4,7 @@ const api = require('../helpers/api');
 // Action type constants
 /* *** TODO: Put action constants here *** */
 const INSERT = 'nevewrote/notebooks/INSERT';
+const REMOVE = 'nevewrote/notebooks/REMOVE';
 const UPDATE = 'nevewrote/notebooks/UPDATE';
 
 const initialState = {
@@ -24,9 +25,14 @@ function reducer(state, action) {
   switch(action.type) {
     /* *** TODO: Put per-action code here *** */
     case INSERT: {
-      const unsortedNotebooks = _.concat(state.visibleNotebooks, action.notebooks);
-      const visibleNotebooks = _.orderBy(unsortedNotebooks, 'createdAt','desc');
-      return _.assign({}, state, { visibleNotebooks} );
+      const unsortedNotebooks = _.concat(state.data, action.notebooks);
+      const data = _.orderBy(unsortedNotebooks, 'createdAt','desc');
+      return _.assign({}, state, { data } );
+    }
+
+    case REMOVE: {
+      const data = _.reject(state.data, {id: action.id});
+      return _.assign({}, state, { data });
     }
 
   	case UPDATE: {
@@ -38,17 +44,12 @@ function reducer(state, action) {
 }
 
 // Action creators
-/* *** TODO: Put action creators here *** */
-reducer.loadNotes = (notebookId, callback) => {
-
+reducer.loadNotes = (notebookId) => {
 	return (dispatch) => {
     api.get('/notebooks/' + notebookId + '/notes').then((notes) => {
       console.log(JSON.stringify(console.log(notes)));
       dispatch({ type: UPDATE, notebookId, notes });
-      callback();
-    }).catch(() => {
-      alert('Failed to get notes.');
-    });
+    })
   };
 };
 
@@ -56,13 +57,22 @@ reducer.inserNotebooks = (notebooks) => {
   return { type: INSERT, notebooks };
 };
 
-reducer.createNotebook = (newNotebook, callback) => {
+reducer.createNotebook = (newNotebook) => {
   return (dispatch) => {
     api.post('/notebooks', newNotebook).then((notebook) => {
       dispatch(reducer.insertNotebooks([notebook]));
-      callback();
-    }).catch(() => {
-      alert('Failed to create Notebook.');
+    });
+  };
+};
+
+reducer.removeNotebook = (id) => {
+  return { type: REMOVE, id };
+};
+
+reducer.deleteNotebook = (notebookId) => {
+   return (dispatch) => {
+    api.delete('/notebooks/' + notebookId).then((notebook) => {
+      dispatch(reducer.removeNotebook(notebook));
     });
   };
 };

@@ -10,21 +10,22 @@ class Notebook extends React.Component {
   }
 
   render() {
-  	const onClickNotebook = (event) => {
+    const onClickThisNotebook = (event) => {
     	event.preventDefault();
     	this.props.loadNotes(this.props.notebook.id);
-      this.setState({ Activing: true });
+      this.setState({ activing: true });
     };
 
-    //START HEAR!!
-    //Put edit here
+    const deleteThisNotebook = () => {
+      this.props.deleteNotebook(this.props.notebook.id);
+    };
 
-    // Render read-only view of the post
     return (
       <NotebookView
-        //key={notebook.id}
+        key={this.props.notebook.id}
         notebook={this.props.notebook}
-        notebookClick={onClickNotebook}
+        onClickNotebook={onClickThisNotebook}
+        onDelete={deleteThisNotebook}
       />
     );
   }

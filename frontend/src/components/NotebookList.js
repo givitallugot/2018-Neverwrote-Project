@@ -8,27 +8,22 @@ const NotebookNew = require('./NotebookNew');
 const createActionDispatchers = require('../helpers/createActionDispatchers');
 const notebooksActionCreators = require('../reducers/notebooks');
 
-/*
-  *** TODO: Build more functionality into the NotebookList component ***
-  At the moment, the NotebookList component simply renders the notebooks
-  as a plain list containing their titles. This code is just a starting point,
-  you will need to build upon it in order to complete the assignment.
-*/
-
 class NotebookList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { Activing: false };
+    this.state = { activing: false };
   }
 
   render() {
+
     const createNotebookComponent = (notebook) => {
-      if(notebook.id === this.props.activeNotebookId) {
+      if(notebook.id === this.props.notebooks.activeNotebookId) {
       	return (
           <ActiveNotebook
             key={notebook.id}
             notebook={notebook}
-            notes={this.props.notes}
+            notes={this.props.notebooks.notes}
+            deleteNotebook={this.props.deleteNotebook}
           />
         );
       }
@@ -37,6 +32,7 @@ class NotebookList extends React.Component {
           key={notebook.id}
           notebook={notebook}
           loadNotes={this.props.loadNotes}
+          deleteNotebook={this.props.deleteNotebook}
         />
       );
     };

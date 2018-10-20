@@ -5,19 +5,22 @@ const ActiveNotebookView = require('./ActiveNotebookView');
 class ActiveNotebook extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { Activing: true };
+    this.state = { editing: false };
   }
 
   render() {
 
-    //Put edit here
+    const deleteActiveNotebook = () => {
+      this.props.deleteNotebook(this.props.notebook.id);
+    };
 
     // Render read-only view of the post
     return (
       <ActiveNotebookView
-        //key={notebook.id}
+        key={this.props.notebook.id}
         notebook={this.props.notebook}
         notes={this.props.notes}
+        onDelete={deleteActiveNotebook}
       />
     );
   }

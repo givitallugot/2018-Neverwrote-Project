@@ -9,7 +9,13 @@ const React = require('react');
 const NotebookView = (props) => {
   return (
     <li className="neverwrote-notebook-title">
-      <a href="#" onClick={props.notebookClick}>
+      <a role="button" title="Delete this notebook"
+          style={{ paddingRight: '8px' }}
+          onClick={ props.onDelete }
+      >
+        <span className="fa fa-remove" />
+      </a>
+      <a href="#" onClick={ props.onClickNotebook } >
         {props.notebook.title}
       </a>
     </li>

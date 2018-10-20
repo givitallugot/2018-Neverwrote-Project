@@ -8,7 +8,7 @@ class NotebookEdit extends React.Component {
 
     this.state = {
       title: notebook.title || ''
-    }; //note..?
+    };
   }
 
   render() {
@@ -32,26 +32,27 @@ class NotebookEdit extends React.Component {
     return (
       <form className="neverwrote-notebook-form">
         {/* Title field */}
-        <div className="neverwrote-notebook-form-title">
-          <input className="neverwrote-notebook-form-title-input" value={this.state.title}
+        <div className="form-group">
+          <input className="form-control input-lg" value={this.state.title}
             placeholder="Notebook title" onChange={onTitleChange}
           />
         </div>
 
-        {/* Save button */}
-        <button className="neverwrote-notebook-form-save"
-          onClick={submitAndStopEditing}
-        >
-          Save
-        </button>
-
         {/* Cancel button */}
-        <button className="neverwrote-notebook-form-cancel"
+        <button className="btn btn-default pull-right"
           style={{ marginRight: '12px' }}
           onClick={revertAndStopEditing}
         >
           Cancel
         </button>
+
+        {/* Save button */}
+        <button className="btn btn-default pull-right"
+          onClick={submitAndStopEditing}
+        >
+          Save
+        </button>
+
       </form>
     );
   }
