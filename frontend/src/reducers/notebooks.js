@@ -53,14 +53,14 @@ reducer.loadNotes = (notebookId) => {
   };
 };
 
-reducer.inserNotebooks = (notebooks) => {
+reducer.insertNotebook = (notebooks) => {
   return { type: INSERT, notebooks };
 };
 
 reducer.createNotebook = (newNotebook) => {
   return (dispatch) => {
     api.post('/notebooks', newNotebook).then((notebook) => {
-      dispatch(reducer.insertNotebooks([notebook]));
+      dispatch(reducer.insertNotebook([notebook]));
     });
   };
 };

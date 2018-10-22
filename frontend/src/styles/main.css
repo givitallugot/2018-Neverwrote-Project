@@ -1,1 +1,98 @@
 /* *** TODO: Put your CSS styles here to make the web application look nice *** */
+
+/* .notecontent { display:none; } */
+
+@media (min-width: 1400px) {
+  .container {
+    width: 1200px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+  }
+}
+
+.neverwrote-header{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 50px;
+  font-weight: normal;
+}
+
+.neverwrote-description{
+  margin-left: 36px;
+  font-size: 25px;
+  color: #999;
+}
+
+.neverwrote-main {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.neverwrote-notebook-header{
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+.neverwrote-note-header{
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+#neverwrote-new{
+  font-size: 25px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+ul{
+  list-style:none;
+  padding-left:15px;
+  font-size: 20px;
+}
+
+ol{
+  list-style:none;
+  padding-left:15px;
+  font-size: 20px;
+}
+
+li{
+  list-style:none;
+  padding-left:15px;
+  font-size: 20px;
+}
+
+#note-content{
+  font-size: 20px;
+}
+
+#button-cancel{
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#button-save{
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#button-cancel:hover{
+  background-color: #920;
+}
+
+#button-save:hover{
+  background-color: #295;
+}
+
+#neverwrote-note-add-form{
+  margin-top: 5px;
+  padding-bottom: 100px;
+}
+
+#neverwrote-notebook-add-form{
+  margin-top: 5px;
+  padding-bottom: 100px;
+}

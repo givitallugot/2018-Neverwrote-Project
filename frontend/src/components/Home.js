@@ -15,9 +15,9 @@ const NotebookList = require('./NotebookList');
 */
 const Home = () => (
   <div className="container">
-    <h1>Neverwrote</h1>
-    <p>
-      This placeholder text was rendered by the <code>Home</code> component
+    <h1 className="neverwrote-header">Neverwrote</h1>
+    <p className="neverwrote-description">
+      Never say "I never wrote that down" ever again!
     </p>
     <NotebookList />
   </div>

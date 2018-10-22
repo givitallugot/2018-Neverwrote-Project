@@ -18,6 +18,8 @@ class NotebookList extends React.Component {
 
   render() {
 
+    let activeNotebookId = this.props.notebooks.activeNotebookId
+
     const createNotebookComponent = (notebook) => {
       if(notebook.id === this.props.notebooks.activeNotebookId) {
       	return (
@@ -40,19 +42,22 @@ class NotebookList extends React.Component {
     };
 
     return (
-      <div className="neverwrote-notebook-div">
-        <h2>Notebooks</h2>
-        <NotebookNew
-          createNotebook={this.props.createNotebook}
-        />
-        
-        <ul>
-          {this.props.notebooks.data.map(createNotebookComponent)}
-        </ul>
+      <div className="neverwrote-main">
+        <div className="neverwrote-note-div">
+          <h2 className="neverwrote-notebook-header">Notebooks</h2>
+          <NotebookNew
+            createNotebook={this.props.createNotebook}
+          />
+          <ul>
+            {this.props.notebooks.data.map(createNotebookComponent)}
+          </ul>
+        </div>
 
         <NoteList
           notebooks={this.props.notebooks}
+          key={this.props.notebooks.notes.id}
           notes={this.props.notebooks.notes}
+          activeNotebookId={activeNotebookId}
         />
       </div>
     );

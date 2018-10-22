@@ -34,7 +34,7 @@ class NotebookNew extends React.Component {
 
     return (
       <div>
-      <button className="blog-load-more btn btn-primary btn-lg" onClick={openEdit}>+ new notebook</button>
+      <button id="neverwrote-new" className="btn btn-lg btn-md" onClick={openEdit}>+ new notebook</button>
       </div>
     );
   }

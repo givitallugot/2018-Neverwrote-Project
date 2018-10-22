@@ -30,28 +30,28 @@ class NotebookEdit extends React.Component {
     };
 
     return (
-      <form className="neverwrote-notebook-form">
+      <form className="neverwrote-notebook-add-form">
         {/* Title field */}
         <div className="form-group">
-          <input className="form-control input-lg" value={this.state.title}
+          <input id="notebook-title" className="form-control input-lg" value={this.state.title}
             placeholder="Notebook title" onChange={onTitleChange}
           />
-        </div>
+          {/* Cancel button */}
+          <button id="button-cancel" className="btn btn-default pull-right"
+            style={{ marginRight: '0px' }}
+            onClick={revertAndStopEditing}
+          >
+            Cancel
+          </button>
 
-        {/* Cancel button */}
-        <button className="btn btn-default pull-right"
-          style={{ marginRight: '12px' }}
-          onClick={revertAndStopEditing}
-        >
-          Cancel
-        </button>
+          {/* Save button */}
+          <button id="button-save" className="btn btn-default pull-right"
+            onClick={submitAndStopEditing}
+          >
+            Save
+          </button>
 
-        {/* Save button */}
-        <button className="btn btn-default pull-right"
-          onClick={submitAndStopEditing}
-        >
-          Save
-        </button>
+          </div>
 
       </form>
     );

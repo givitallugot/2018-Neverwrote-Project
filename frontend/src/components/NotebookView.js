@@ -13,7 +13,7 @@ const NotebookView = (props) => {
           style={{ paddingRight: '8px' }}
           onClick={ props.onDelete }
       >
-        <span className="fa fa-remove" />
+        <span className="btn btn-danger btn-sm" />
       </a>
       <a href="#" onClick={ props.onClickNotebook } >
         {props.notebook.title}
