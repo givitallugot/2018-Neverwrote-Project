@@ -3,6 +3,8 @@ const React = require('react');
 const NotebookEdit = require('./NotebookEdit');
 const NotebookView = require('./NotebookView');
 
+const NoteNew = require('./NoteNew');
+
 class Notebook extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,7 @@ class Notebook extends React.Component {
     	event.preventDefault();
     	this.props.loadNotes(this.props.notebook.id);
       this.setState({ activing: true });
+
     };
 
     const deleteThisNotebook = () => {

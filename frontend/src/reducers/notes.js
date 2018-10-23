@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const api = require('../helpers/api');
 
+const notebooksActionsCreator = require('./notebooks');
 // Action type constants
 /* *** TODO: Put action constants here *** */
 const INSERT = 'nevewrote/notes/INSERT';
@@ -9,8 +10,8 @@ const UPDATE = 'nevewrote/notes/UPDATE';
 
 const initialState = {
   notes : [
-      { notebookId: 100, title: 'hello', content: 'baby'},
-      { notebookId: 100, title: 'hi', content: 'babe'}
+      //{ notebookId: 100, title: 'hello', content: 'baby'},
+      //{ notebookId: 100, title: 'hi', content: 'babe'}
     ]
 };
 
@@ -40,10 +41,12 @@ reducer.insertNote = (notes) => {
 };
 
 // Action creators
-reducer.createNote = (newNote) => {
+reducer.createNote = (newNote, notebookId, callback) => {
   return (dispatch) => {
     api.post('/notes', newNote).then((note) => {
-      dispatch(reducer.insertNote([note]));
+      dispatch(reducer.insertNote(note));
+      dispatch(notebooksActionsCreator.loadNotes(notebookId));
+      callback();
     });
   };
 };
@@ -52,10 +55,12 @@ reducer.removeNote = (id) => {
   return { type: REMOVE, id };
 };
 
-reducer.deleteNote = (noteId) => {
+reducer.deleteNote = (noteId, notebookId, callback) => {
    return (dispatch) => {
     api.delete('/notes/' + noteId).then((note) => {
-      dispatch(reducer.removeNote(note));
+      dispatch(reducer.removeNote(noteId));
+      dispatch(notebooksActionsCreator.loadNotes(notebookId));
+      callback();
     });
   };
 };

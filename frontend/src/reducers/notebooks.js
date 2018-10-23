@@ -6,6 +6,7 @@ const api = require('../helpers/api');
 const INSERT = 'nevewrote/notebooks/INSERT';
 const REMOVE = 'nevewrote/notebooks/REMOVE';
 const UPDATE = 'nevewrote/notebooks/UPDATE';
+const RELOAD = 'nevewrote/notebooks/RELOAD';
 
 const initialState = {
   data: [
@@ -36,7 +37,11 @@ function reducer(state, action) {
     }
 
   	case UPDATE: {
-    	return _.assign({}, state, { activeNotebookId: action.notebookId, notes: action.notes });
+      return _.assign({}, state, { activeNotebookId: action.notebookId, notes: action.notes });
+    }
+
+    case RELOAD: {
+      return _.assign({}, state, { data: action.notebooks });
     }
 
     default: return state;
@@ -44,12 +49,22 @@ function reducer(state, action) {
 }
 
 // Action creators
-reducer.loadNotes = (notebookId) => {
+reducer.loadNotebooks = (callback) => {
+	return (dispatch) => {
+    api.get('/notebooks').then((notebooks) => {
+      dispatch({ type: RELOAD, notebooks });
+      callback();
+    });
+  };
+};
+
+reducer.loadNotes = (notebookId, callback) => {
 	return (dispatch) => {
     api.get('/notebooks/' + notebookId + '/notes').then((notes) => {
       console.log(JSON.stringify(console.log(notes)));
       dispatch({ type: UPDATE, notebookId, notes });
-    })
+      callback();
+    });
   };
 };
 
@@ -57,10 +72,13 @@ reducer.insertNotebook = (notebooks) => {
   return { type: INSERT, notebooks };
 };
 
-reducer.createNotebook = (newNotebook) => {
+reducer.createNotebook = (newNotebook, callback) => {
   return (dispatch) => {
     api.post('/notebooks', newNotebook).then((notebook) => {
-      dispatch(reducer.insertNotebook([notebook]));
+      //dispatch(reducer.insertNotebook([notebook]));
+      dispatch({ type: INSERT, notebook});
+      dispatch(reducer.loadNotebooks());
+      callback();
     });
   };
 };
@@ -69,10 +87,12 @@ reducer.removeNotebook = (id) => {
   return { type: REMOVE, id };
 };
 
-reducer.deleteNotebook = (notebookId) => {
+reducer.deleteNotebook = (notebookId, callback) => {
    return (dispatch) => {
     api.delete('/notebooks/' + notebookId).then((notebook) => {
       dispatch(reducer.removeNotebook(notebook));
+      dispatch(reducer.loadNotebooks());
+      callback();
     });
   };
 };

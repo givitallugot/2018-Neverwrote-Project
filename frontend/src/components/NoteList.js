@@ -20,6 +20,7 @@ class NoteList extends React.Component {
           key={note.id}
           note={note}
           deleteNote={this.props.deleteNote}
+          activeNotebookId={this.props.activeNotebookId}
         />
       );
     };

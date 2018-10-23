@@ -16,8 +16,8 @@ class NoteNew extends React.Component {
       this.setState({ editing: false });
     };
 
-    const createNote = (newNote) => {
-      this.props.createNote(newNote, (err) => {
+    const createNote = (newNote, notebookId) => {
+      this.props.createNote(newNote, notebookId, (err) => {
         if(!err) closeEdit();
       });
     };
