@@ -58,7 +58,7 @@ class NoteEdit extends React.Component {
 
         {/* Cancel button */}
         <button id="button-cancel" className="btn btn-default pull-right"
-          style={{ marginRight: '12px' }}
+          style={{ marginRight: '0px' }}
           onClick={revertAndStopEditing}
         >
           Cancel

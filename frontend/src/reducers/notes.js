@@ -2,16 +2,15 @@ const _ = require('lodash');
 const api = require('../helpers/api');
 
 const notebooksActionsCreator = require('./notebooks');
+
 // Action type constants
-/* *** TODO: Put action constants here *** */
 const INSERT = 'nevewrote/notes/INSERT';
 const REMOVE = 'nevewrote/notes/REMOVE';
 const UPDATE = 'nevewrote/notes/UPDATE';
 
 const initialState = {
   notes : [
-      //{ notebookId: 100, title: 'hello', content: 'baby'},
-      //{ notebookId: 100, title: 'hi', content: 'babe'}
+
     ]
 };
 
@@ -23,7 +22,7 @@ function reducer(state, action) {
     /* *** TODO: Put per-action code here *** */
     case INSERT: {
       const unsortedNotes = _.concat(state.notes, action.notes);
-      const notes = _.orderBy(unsortedNotes, 'createdAt','desc');
+      const notes = _.orderBy(unsortedNotes, 'createdAt', 'desc');
       return _.assign({}, state, { notes } );
     }
 

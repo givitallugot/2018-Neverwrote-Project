@@ -10,7 +10,6 @@ const notesActionCreators = require('../reducers/notes');
 class NoteList extends React.Component {
   constructor(props) {
     super(props);
-    //this.state = { activing: false };
   }
   render() {
 

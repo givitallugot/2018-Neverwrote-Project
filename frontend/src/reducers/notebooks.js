@@ -2,7 +2,6 @@ const _ = require('lodash');
 const api = require('../helpers/api');
 
 // Action type constants
-/* *** TODO: Put action constants here *** */
 const INSERT = 'nevewrote/notebooks/INSERT';
 const REMOVE = 'nevewrote/notebooks/REMOVE';
 const UPDATE = 'nevewrote/notebooks/UPDATE';
@@ -17,14 +16,13 @@ const initialState = {
   notes : []
 };
 
-// Function which takes the current data state and an action,
-// and returns a new state
+// Function which takes the current data state and an action, and returns a new state
 function reducer(state, action) {
   state = state || initialState;
   action = action || {};
 
   switch(action.type) {
-    /* *** TODO: Put per-action code here *** */
+    /* Put per-action code */
     case INSERT: {
       const unsortedNotebooks = _.concat(state.data, action.notebooks);
       const data = _.orderBy(unsortedNotebooks, 'createdAt','desc');
@@ -75,7 +73,6 @@ reducer.insertNotebook = (notebooks) => {
 reducer.createNotebook = (newNotebook, callback) => {
   return (dispatch) => {
     api.post('/notebooks', newNotebook).then((notebook) => {
-      //dispatch(reducer.insertNotebook([notebook]));
       dispatch({ type: INSERT, notebook});
       dispatch(reducer.loadNotebooks());
       callback();

@@ -36,23 +36,22 @@ class NotebookEdit extends React.Component {
           <input id="notebook-title" className="form-control input-lg" value={this.state.title}
             placeholder="Notebook title" onChange={onTitleChange}
           />
-          {/* Cancel button */}
-          <button id="button-cancel" className="btn btn-default pull-right"
-            style={{ marginRight: '0px' }}
-            onClick={revertAndStopEditing}
-          >
-            Cancel
-          </button>
+         </div>
 
-          {/* Save button */}
-          <button id="button-save" className="btn btn-default pull-right"
-            onClick={submitAndStopEditing}
-          >
-            Save
-          </button>
+        {/* Cancel button */}
+        <button id="button-cancel" className="btn btn-default pull-right"
+          style={{ marginRight: '0px' }}
+          onClick={revertAndStopEditing}
+        >
+          Cancel
+        </button>
 
-          </div>
-
+        {/* Save button */}
+        <button id="button-save" className="btn btn-default pull-right"
+          onClick={submitAndStopEditing}
+        >
+          Save
+        </button>
       </form>
     );
   }

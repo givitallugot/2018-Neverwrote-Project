@@ -16,7 +16,6 @@ class Notebook extends React.Component {
     	event.preventDefault();
     	this.props.loadNotes(this.props.notebook.id);
       this.setState({ activing: true });
-
     };
 
     const deleteThisNotebook = () => {
